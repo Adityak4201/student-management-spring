@@ -25,13 +25,7 @@ import lombok.Setter;
 public class StudentSubject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer  id;
-
-    @Column(name = "student_id",insertable = false, updatable = false)
-    private Integer studentId;
-
-    @Column(name = "subject_id",insertable = false, updatable = false)
-    private Integer subjectId;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable =  false)

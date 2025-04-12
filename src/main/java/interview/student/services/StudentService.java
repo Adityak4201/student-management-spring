@@ -1,7 +1,9 @@
 package interview.student.services;
 
+import interview.student.dtos.request.AssignSubjectRequestDto;
 import interview.student.dtos.request.CreateStudentRequestDto;
 import interview.student.dtos.request.UpdateStudentRequestDto;
+import interview.student.dtos.response.AssignSubjectResponseDto;
 import interview.student.dtos.response.CreateStudentResponseData;
 import interview.student.dtos.response.UpdateStudentResponseData;
 
@@ -10,4 +12,6 @@ public interface StudentService {
 
     public UpdateStudentResponseData updateStudent(String studentId, UpdateStudentRequestDto updateStudentRequestDto)
             throws Exception;
+
+    public AssignSubjectResponseDto assignSubject(AssignSubjectRequestDto assignSubjectDto) throws Exception;
 }

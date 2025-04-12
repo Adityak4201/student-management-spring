@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CreateSubjectResponseData {
+public class DeleteSubjectResponseData {
     private Integer subjectId;
 }

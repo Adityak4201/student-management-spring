@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import interview.student.dtos.GenericResponse;
+import interview.student.dtos.request.AssignSubjectRequestDto;
 import interview.student.dtos.request.CreateStudentRequestDto;
 import interview.student.dtos.request.UpdateStudentRequestDto;
+import interview.student.dtos.response.AssignSubjectResponseDto;
 import interview.student.dtos.response.CreateStudentResponseData;
 import interview.student.dtos.response.UpdateStudentResponseData;
 import interview.student.services.StudentService;
@@ -50,4 +52,18 @@ public class StudentController {
                 .statusCode(HttpStatus.OK.value())
                 .build();
     }
+
+    @PostMapping("/subject/assign")
+    @ResponseBody
+    GenericResponse<AssignSubjectResponseDto> createStudent(
+            @RequestBody @Valid AssignSubjectRequestDto assignSubjectDto)
+            throws Exception {
+        AssignSubjectResponseDto assignResponse = studentService.assignSubject(assignSubjectDto);
+        return GenericResponse.<AssignSubjectResponseDto>builder()
+                .message("Subject assigned successfully")
+                .data(assignResponse)
+                .statusCode(HttpStatus.OK.value())
+                .build();
+    }
+
 }
