@@ -2,7 +2,11 @@ package interview.student.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,10 +33,12 @@ public class Student extends BaseEntity {
 
     private String name;
 
+    @Column(unique = true)
     private String rollNo;
 
     private Integer age;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<StudentSubject> StudentSubjects;
+    @OneToMany(mappedBy = "student")
+    @JsonManagedReference
+    private List<StudentSubject> studentSubjects;
 }

@@ -1,6 +1,7 @@
 package interview.student.controllers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import interview.student.dtos.request.UpdateStudentRequestDto;
 import interview.student.dtos.response.AssignSubjectResponseDto;
 import interview.student.dtos.response.CreateStudentResponseData;
 import interview.student.dtos.response.UpdateStudentResponseData;
+import interview.student.models.Student;
 import interview.student.services.StudentService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -62,6 +64,17 @@ public class StudentController {
         return GenericResponse.<AssignSubjectResponseDto>builder()
                 .message("Subject assigned successfully")
                 .data(assignResponse)
+                .statusCode(HttpStatus.OK.value())
+                .build();
+    }
+
+    @GetMapping("")
+    @ResponseBody
+    GenericResponse<Iterable<Student>> getStudents() throws Exception {
+        Iterable<Student> students = studentService.getStudents();
+        return GenericResponse.<Iterable<Student>>builder()
+                .message("Subject assigned successfully")
+                .data(students)
                 .statusCode(HttpStatus.OK.value())
                 .build();
     }

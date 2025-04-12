@@ -1,5 +1,8 @@
 package interview.student.serviceImpl;
 
+import java.util.List;
+
+import org.hibernate.mapping.Any;
 import org.springframework.stereotype.Service;
 
 import interview.student.dtos.request.AssignSubjectRequestDto;
@@ -82,5 +85,12 @@ public class StudentServiceImpl implements StudentService {
         StudentSubject createdAssignedSubject = studentSubjectRepository.save(assignSubject);
 
         return AssignSubjectResponseDto.builder().id(createdAssignedSubject.getId()).build();
+    }
+
+    @Override
+    public Iterable<Student> getStudents() throws Exception {
+        Iterable<Student> students = studentRepository.findAll();
+
+        return students;
     }
 }
