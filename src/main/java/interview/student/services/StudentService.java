@@ -17,4 +17,5 @@ public interface StudentService {
     public AssignSubjectResponseDto assignSubject(AssignSubjectRequestDto assignSubjectDto) throws Exception;
 
     public Iterable<Student> getStudents() throws Exception;
+
 }

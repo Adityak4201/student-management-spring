@@ -73,7 +73,7 @@ public class StudentController {
     GenericResponse<Iterable<Student>> getStudents() throws Exception {
         Iterable<Student> students = studentService.getStudents();
         return GenericResponse.<Iterable<Student>>builder()
-                .message("Subject assigned successfully")
+                .message("Students list fetched")
                 .data(students)
                 .statusCode(HttpStatus.OK.value())
                 .build();

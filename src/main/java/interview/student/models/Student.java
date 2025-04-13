@@ -2,7 +2,6 @@ package interview.student.models;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -18,6 +17,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,7 +38,8 @@ public class Student extends BaseEntity {
 
     private Integer age;
 
-    @OneToMany(mappedBy = "student")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("student-subject")
+    @ToString.Exclude
     private List<StudentSubject> studentSubjects;
 }

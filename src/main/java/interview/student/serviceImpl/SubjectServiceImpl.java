@@ -1,17 +1,15 @@
 package interview.student.serviceImpl;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import interview.student.dtos.request.CreateSubjectRequestDto;
 import interview.student.dtos.response.CreateSubjectResponseData;
 import interview.student.dtos.response.DeleteSubjectResponseData;
-import interview.student.models.StudentSubject;
 import interview.student.models.Subject;
 import interview.student.repositories.StudentSubjectRepository;
 import interview.student.repositories.SubjectRepository;
 import interview.student.services.SubjectService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -37,10 +35,14 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public DeleteSubjectResponseData deleteSubject(String subjectId) throws Exception {
 
-        List<StudentSubject> studentsAssigned = studentSubjectRepository.findBySubjectId(Integer.parseInt(subjectId));
+        long studentsAssigned = studentSubjectRepository.countBySubjectId(Integer.parseInt(subjectId));
 
-        if (studentsAssigned.size() > 0) {
-            throw new Exception("Subject has already been assigned to students");
+        if (studentsAssigned > 0) {
+            throw new IllegalStateException("Subject has already been assigned to students");
+        }
+
+        if (!subjectRepository.existsById(Integer.parseInt(subjectId))) {
+            throw new EntityNotFoundException("Subject not found");
         }
 
         subjectRepository.deleteById(Integer.parseInt(subjectId));

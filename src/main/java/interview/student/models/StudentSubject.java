@@ -1,13 +1,9 @@
 package interview.student.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonView;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,14 +30,14 @@ public class StudentSubject {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "student_id")
+    @JsonBackReference("student-subject")
     @ToString.Exclude
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id", nullable = false)
-    @JsonView
+    @JoinColumn(name = "subject_id")
+    @JsonManagedReference("subject-detail")
     @ToString.Exclude
     private Subject subject;
 }

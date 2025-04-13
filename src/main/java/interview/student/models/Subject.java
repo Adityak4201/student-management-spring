@@ -3,12 +3,8 @@ package interview.student.models;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonView;
 
 import interview.student.enums.Branch;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -42,6 +38,8 @@ public class Subject {
     private Branch branch;
 
     @OneToMany(mappedBy = "subject")
-    @JsonIgnore
+    @JsonBackReference("subject-detail")
+    @ToString.Exclude
     private List<StudentSubject> studentSubjects;
+
 }
